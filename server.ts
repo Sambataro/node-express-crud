@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
-const bodyParser = require('body-parser');
-const routes = require('./routes');
+import bodyParser from 'body-parser';
+import routes from './routes';
 const validator = require('validator');
 const app = express();
 const PORT = 3000;

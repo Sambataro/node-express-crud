@@ -1,6 +1,6 @@
 import {Room} from "./interfaces";
 
-const express = require('express');
+import express from 'express';
 import connection from "./db";
 const router = express.Router();
 // chiamata per tutti i records
@@ -64,4 +64,4 @@ router.put('/rooms/edit', (req: { body: Room; }, res: { send: (arg0: string) => 
 
 
 
-module.exports = router;
+export default router;
