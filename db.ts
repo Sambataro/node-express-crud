@@ -1,4 +1,4 @@
-const config = require('./config');
+import config from './config';
 const mysql = require('mysql');
 
 const conn = mysql.createConnection({
@@ -8,8 +8,8 @@ const conn = mysql.createConnection({
     database : config.db,
     multipleStatements : true
 });
-conn.connect(function(err) {
+conn.connect(function(err: string) {
     if (err) throw err;
     console.log("Connected!");
 });
-module.exports = conn;
+export default conn;

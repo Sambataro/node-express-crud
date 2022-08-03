@@ -1,9 +1,11 @@
+import {Room} from "./interfaces";
+
 const express = require('express');
-const connection = require("./db");
+import connection from "./db";
 const router = express.Router();
 // chiamata per tutti i records
-router.get('/', (req,res) => {
-    connection.query("SELECT * FROM rooms", (err, rows, fields) => {
+router.get('/', (req: any, res: { send: (arg0: string) => void; json: (arg0: any) => void; }) => {
+    connection.query("SELECT * FROM rooms", (err: { sqlMessage: string; }, rows: unknown, fields: unknown) => {
         if (err) {
             res.send('Query error: ' + err.sqlMessage);
         } else {
@@ -12,8 +14,8 @@ router.get('/', (req,res) => {
     });
 })
 // chiamata per id del singolo record
-router.get('/rooms/:id', (req,res) => {
-    connection.query("SELECT * FROM rooms WHERE id = ?", [req.params.id],  (err, rows, fields) => {
+router.get('/rooms/:id', (req: { params: { id: any; }; }, res: { send: (arg0: string) => void; json: (arg0: any) => void; }) => {
+    connection.query("SELECT * FROM rooms WHERE id = ?", [req.params.id],  (err: { sqlMessage: string; }, rows: unknown, fields: unknown) => {
         if (err) {
             res.send('Query error: ' + err.sqlMessage);
         } else {
@@ -22,8 +24,8 @@ router.get('/rooms/:id', (req,res) => {
     });
 })
 // chiamata delete
-router.delete('/rooms/delete/:id', (req,res) => {
-    connection.query("DELETE FROM rooms WHERE id = ?", [req.params.id],  (err, rows, fields) => {
+router.delete('/rooms/delete/:id', (req: { params: { id: number; }; }, res: { send: (arg0: string) => void; }) => {
+    connection.query("DELETE FROM rooms WHERE id = ?", [req.params.id],  (err: { sqlMessage: string; }, rows: unknown, fields: unknown) => {
         if (err) {
             res.send('Query error: ' + err.sqlMessage);
         } else {
@@ -32,10 +34,10 @@ router.delete('/rooms/delete/:id', (req,res) => {
     });
 })
 // chiamata per aggiungere un record
-router.post('/rooms/post', (req,res) => {
+router.post('/rooms/post', (req: { body: Room; }, res: { send: (arg0: string) => void; }) => {
     const sql = "SET @id = ?; SET @name = ?; SET @reserved = ?; CALL RoomAddOrEdit(@id,@name,@reserved);"
     const body = req.body;
-    connection.query(sql, [body.id, body.name, body.reserved],  (err, rows, fields) => {
+    connection.query(sql, [body.id, body.name, body.reserved],  (err: { sqlMessage: string; }, rows: any[], fields: any) => {
         if (err) {
             res.send('Query error: ' + err.sqlMessage);
         } else {
@@ -48,10 +50,10 @@ router.post('/rooms/post', (req,res) => {
     });
 })
 // chiamata per modificare un record
-router.put('/rooms/edit', (req,res) => {
+router.put('/rooms/edit', (req: { body: Room; }, res: { send: (arg0: string) => void; }) => {
     const sql = "SET @id = ?; SET @name = ?; SET @reserved = ?; CALL RoomAddOrEdit(@id,@name,@reserved);"
     const body = req.body;
-    connection.query(sql, [body.id, body.name, body.reserved],  (err, rows, fields) => {
+    connection.query(sql, [body.id, body.name, body.reserved],  (err: { sqlMessage: string; }, rows: any, fields: any) => {
         if (err) {
             res.send('Query error: ' + err.sqlMessage);
         } else {

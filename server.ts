@@ -1,11 +1,11 @@
-const express = require('express');
+import express, { Express } from 'express';
+import cors from 'cors';
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const routes = require('./routes');
 const validator = require('validator');
 const app = express();
 const PORT = 3000;
-const connection = require('./db');
+import connection from './db';
 const router = require('./routes');
 
 app.use(cors());

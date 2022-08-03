@@ -11,3 +11,4 @@ export class Room {
     @Column()
     reserved: boolean;
 }
+export default  Room;
