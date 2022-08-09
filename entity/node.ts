@@ -1,14 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import option from "./option";
 
 @Entity()
-export class Room {
+export class Node {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column()
+    description: string;
 
     @Column()
     name: string;
 
     @Column()
-    reserved: boolean;
+    options: Array<option>
 }
-export default  Room;
+export default  Node;

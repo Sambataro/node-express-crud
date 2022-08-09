@@ -3,7 +3,7 @@ const config = {
     "dbhost": "localhost",
     "dbusername": "root",
     "dbpassword": "password",
-    "db": "hotel_rooms",
+    "db": "chatbot",
     "dbport": 3306
 }
 
